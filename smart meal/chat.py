@@ -49,7 +49,7 @@ else:
 
             # Hugging Face API request
             headers = {
-                "Authorization": f"Bearer {"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"}"
+                "Authorization": f"Bearer {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}"
             }
             data = {
                 "inputs": [
