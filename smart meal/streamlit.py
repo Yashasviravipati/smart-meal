@@ -12,7 +12,7 @@ UNITS_KG_TO_LB = 2.20462
 UNITS_LB_TO_KG = 0.453592
 UNITS_IN_TO_CM = 2.54
 
-HUGGINGFACE_API_KEY = st.secrets["huggingface_apikey"]
+HUGGINGFACE_API_KEY = st.secrets["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"]
 model_id = "meta-llama/Meta-Llama-3-70B-Instruct"
 
 st.set_page_config(page_title="AI - Meal Planner", page_icon="🍴")
@@ -156,7 +156,7 @@ if st.session_state.clicked:
             user_content = f"{prompt} {meal_items} {example_response}"
             response = requests.post(
                 f"https://api-inference.huggingface.co/models/{model_id}",
-                headers={"Authorization": f"Bearer {HUGGINGFACE_API_KEY}"},
+                headers={"Authorization": f"Bearer {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}"},
                 json={"inputs": user_content}
             )
             if response.status_code == 200:
