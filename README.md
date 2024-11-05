@@ -16,6 +16,7 @@ Python 3.8+
 Streamlit
 scikit-learn
 pandas
+
 Usage
 Launch the app and adjust parameters such as caloric needs, dietary preference, and meal type using the sidebar.
 Click "Generate Meal Plan" to get a personalized meal suggestion.
