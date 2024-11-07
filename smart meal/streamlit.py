@@ -1,24 +1,19 @@
 import streamlit as st
-from transformers import AutoTokenizer, AutoModelForMaskedLM
-import torch
+import requests
 
-# Load the model and tokenizer
-tokenizer = AutoTokenizer.from_pretrained("google-bert/bert-base-multilingual-cased")
-model = AutoModelForMaskedLM.from_pretrained("google-bert/bert-base-multilingual-cased")
+# Hugging Face API information
+API_URL = "https://api-inference.huggingface.co/models/YOUR_MODEL_NAME"
+headers = {"Authorization": "Bearer YOUR_HUGGINGFACE_API_KEY"}
 
-# Function to get meal plan with descriptions using BERT
+# Function to get meal plan with descriptions from Hugging Face
 def get_meal_plan_with_descriptions(calories, restrictions):
     prompt = (f"Generate a meal plan for a whole day with approximately {calories} calories. "
               f"Each meal should come with a brief description. Dietary restrictions: {', '.join(restrictions)}.")
-    
-    # Tokenize the input and predict masked tokens
-    inputs = tokenizer(prompt, return_tensors="pt")
-    with torch.no_grad():
-        outputs = model(**inputs)
-    
-    # Decode output tokens (Note: BERT is not designed for text generation, so results may vary)
-    meal_plan = tokenizer.decode(torch.argmax(outputs.logits, dim=-1)[0], skip_special_tokens=True)
-    
+    response = requests.post(API_URL, headers=headers, json={"inputs": prompt})
+    if response.ok:
+        meal_plan = response.json()[0]["generated_text"]
+    else:
+        meal_plan = "Meal plan could not be generated."
     return meal_plan
 
 # Calorie calculation function
