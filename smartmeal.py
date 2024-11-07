@@ -2,8 +2,8 @@ import streamlit as st
 import requests
 
 # Hugging Face API information
-API_URL = "https://api-inference.huggingface.co/models/YOUR_MODEL_NAME"
-headers = {"Authorization": "Bearer YOUR_HUGGINGFACE_API_KEY"}
+API_URL = "https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-1B"
+headers = {"Authorization": "Bearer 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"}
 
 # Function to get meal plan with descriptions from Hugging Face
 def get_meal_plan_with_descriptions(calories, restrictions):
