@@ -9,10 +9,7 @@ headers = {"Authorization": "Bearer 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"}
 def get_meal_plan_with_descriptions(calories, restrictions):
     # Structuring the prompt to provide clearer instructions to the model
     prompt = (
-        f"Create a detailed meal plan for an entire day that provides approximately {calories} calories. "
-        f"Include breakfast, lunch, dinner, and two snacks, with each meal having a brief description. "
-        f"Consider the following dietary restrictions: {', '.join(restrictions)}. "
-        f"Each meal should include the following details: meal name, main ingredients, and a short description. "
+        f"Create a detailed meal plan for an entire day, include meal name and main ingredient that provides approximately {calories} calories. Include breakfast, lunch, dinner, and two snacks, with each meal having a brief description with the following dietary restrictions: {', '.join(restrictions)}. "
     )
     
     # Making the API request
