@@ -7,22 +7,36 @@ headers = {"Authorization": "Bearer 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"}
 
 # Function to get meal plan with descriptions from Hugging Face
 def get_meal_plan_with_descriptions(calories, restrictions):
-    prompt = (f"Generate a meal plan for a whole day with approximately {calories} calories. "
-              f"Each meal should come with a brief description. Dietary restrictions: {', '.join(restrictions)}.")
+    # Structuring the prompt to provide clearer instructions to the model
+    prompt = (
+        f"Create a detailed meal plan for an entire day that provides approximately {calories} calories. "
+        f"Include breakfast, lunch, dinner, and two snacks, with each meal having a brief description. "
+        f"Consider the following dietary restrictions: {', '.join(restrictions)}. "
+        f"Each meal should include the following details: meal name, main ingredients, and a short description. "
+    )
+    
+    # Making the API request
     response = requests.post(API_URL, headers=headers, json={"inputs": prompt})
+
+    # Check response status and extract meal plan if successful
     if response.ok:
-        meal_plan = response.json()[0]["generated_text"]
+        try:
+            meal_plan = response.json()[0].get("generated_text", "No meal plan generated.")
+        except (KeyError, IndexError, TypeError):
+            meal_plan = "Meal plan could not be generated due to unexpected response format."
     else:
-        meal_plan = "Meal plan could not be generated."
+        meal_plan = f"Meal plan could not be generated. Error: {response.status_code} - {response.text}"
+    
     return meal_plan
 
 # Calorie calculation function
 def calculate_calories(age, weight, height, gender):
+    # Using the Harris-Benedict equation for BMR and assuming moderate activity level
     if gender == 'Male':
         bmr = 10 * weight + 6.25 * height - 5 * age + 5
     else:
         bmr = 10 * weight + 6.25 * height - 5 * age - 161
-    daily_calories = bmr * 1.55  # Assuming moderate activity level
+    daily_calories = bmr * 1.55  # Moderate activity factor
     return daily_calories
 
 # Streamlit application
