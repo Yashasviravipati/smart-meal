@@ -1,9 +1,11 @@
 import streamlit as st
 import requests
 
-# Hugging Face API information
-API_URL = "https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-1B"
-headers = {"Authorization": "Bearer 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"}
+# Load model directly
+from transformers import AutoTokenizer, AutoModelForCausalLM
+
+tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.2-1B")
+model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-3.2-1B")
 
 # Function to get meal plan with descriptions from Hugging Face
 def get_meal_plan_with_descriptions(calories, restrictions):
