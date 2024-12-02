@@ -2,12 +2,8 @@ import streamlit as st
 import requests
 
 # Hugging Face API information
-API_URL = "https://api.openai.com/v1/completions"  # Update with your API endpoint
-headers = {
-    "Authorization": "Bearer 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",  # Replace with your free API key
-    "Content-Type": "application/json",
-}
-
+API_URL = "https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-1B"
+headers = {"Authorization": "Bearer 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"}
 
 # Function to get meal plan with descriptions from Hugging Face
 def get_meal_plan_with_descriptions(calories, restrictions):
