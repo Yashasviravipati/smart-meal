@@ -2,9 +2,9 @@ import streamlit as st
 import requests
 
 # Hugging Face API information
-API_URL = "https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-1B"  # Update with your API endpoint
+API_URL = "https://api.openai.com/v1/completions"  # Update with your API endpoint
 headers = {
-    "Authorization": "Bearer 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",  # Replace with your free API key
+    "Authorization": "Bearer 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",  # Replace with your free API key
     "Content-Type": "application/json",
 }
 
