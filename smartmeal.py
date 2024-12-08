@@ -21,7 +21,7 @@ def get_meal_plan_with_descriptions(calories, restrictions):
         "inputs": prompt,
         "parameters": {
             "temperature": 0.7,  # Adjust for balance between determinism and creativity
-            "max_new_tokens": 500,  # Ensure sufficient space for detailed meal plan
+            "max_new_tokens": 700,  # Ensure sufficient space for detailed meal plan
             "return_full_text": False  # Return only the generated text
         },
         "options": {"use_cache": False}  # Optional: Disable caching to ensure a fresh response
